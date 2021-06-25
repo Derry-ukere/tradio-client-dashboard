@@ -7,7 +7,7 @@ const SideBar = () => {
       <div className="menu active">
         <ul className="show">
           <li className="active">
-            <Link to="/profile" data-toggle="tooltip" data-placement="right" data-original-title="Trade" className="active">
+            <Link to="/dashboard" data-toggle="tooltip" data-placement="right" data-original-title="Trade" className="active">
               <span><i className="bi bi-cpu"></i></span>
             </Link>
           </li>

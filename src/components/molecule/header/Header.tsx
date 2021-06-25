@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import InnerNav from '../inner-nav/InnerNav';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 
 const Header = () => {
@@ -19,7 +19,7 @@ const Header = () => {
         <div className="row">
           <div className="col-xl-12">
             <nav className="navbar navbar-expand-lg navbar-light px-0 justify-content-between">
-              <Link className="navbar-brand" to="#"><img src='./logo.png' alt="logo" /></Link>
+              <a className="navbar-brand" href="https://amazing-borg-54732d.netlify.app/"><img src='./logo.png' alt="logo" /></a>
               <div className="header-right d-flex my-2 align-items-center">
                 <div className="language">
                   <div className="dropdown">

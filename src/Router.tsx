@@ -8,9 +8,13 @@ import Welcome from './components/organism/Welcome';
 import Profile from './components/organism/Profile';
 import Data from './components/organism/Data';
 import Setting from './components/organism/Setting';
-import Security from './components/organism/Security';
+import Addbank from './components/organism/Addbank';
+import BankForm from './components/organism/BankForm';
+import CardForm from './components/organism/CardForm';
+import AddId from './components/molecule/settings/AddId';
+import Security from './components/molecule/settings/Security';
 
-function App() {
+function Router() {
   return (
     <BrowserRouter>
       <Switch>
@@ -24,6 +28,10 @@ function App() {
               <Route path='/account' exact component={Profile} />
               <Route path='/data' exact component={Data} />
               <Route path='/settings' exact component={Setting} />
+              <Route path='/add-bank' exact component={Addbank} />
+              <Route path='/bank-form' exact component={BankForm} />
+              <Route path='/card-form' exact component={CardForm} />
+              <Route path='/add-id' exact component={AddId} />
               <Route path='/security' exact component={Security} />
 
 
@@ -37,4 +45,4 @@ function App() {
   );
 }
 
-export default App;
+export default Router;

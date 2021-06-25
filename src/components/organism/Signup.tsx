@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 const Signup = () => {
   return (
@@ -8,7 +9,7 @@ const Signup = () => {
           <div className="row justify-content-center h-100 align-items-center">
             <div className="col-xl-5 col-md-6">
               <div className="mini-logo text-center my-5">
-                <a href="index.html"><img src="./images/logo.png" alt="" /></a>
+                <a href="https://amazing-borg-54732d.netlify.app/"><img src='./logo.png' alt="logo here" /></a>
               </div>
               <div className="auth-form card">
                 <div className="card-header justify-content-center">
@@ -33,7 +34,7 @@ const Signup = () => {
                     </div>
                   </form>
                   <div className="new-account mt-3">
-                    <p>Already have an account? <a className="text-primary" href="signin.html">Sign in</a>
+                    <p>Already have an account? <Link className="text-primary" to="/">Sign in</Link>
                     </p>
                   </div>
                 </div>
