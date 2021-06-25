@@ -12,7 +12,7 @@ const Dashboard: FC = ({ children }) => {
       <SideBar />
       <PageTitle />
       <div className="content-body">
-        <div className="container-fluid">
+        <div className="container">
           {children}
         </div>
       </div>

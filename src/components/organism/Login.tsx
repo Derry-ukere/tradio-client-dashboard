@@ -1,6 +1,5 @@
 import React from 'react';
-// import Loader from '../atom/loader/Loader';
-
+import {Link}  from 'react-router-dom';
 const Login = () => {
   return (
     <div id="main-wrapper" className="show">
@@ -9,7 +8,7 @@ const Login = () => {
           <div className="row justify-content-center h-100 align-items-center">
             <div className="col-xl-5 col-md-6">
               <div className="mini-logo text-center my-5">
-                <a href="index.html"><img src="./images/logo.png" alt="" /></a>
+                <a href="https://amazing-borg-54732d.netlify.app"><img src="./logo.png" alt="" /></a>
               </div>
               <div className="auth-form card">
                 <div className="card-header justify-content-center">
@@ -42,8 +41,8 @@ const Login = () => {
                     </div>
                   </form>
                   <div className="new-account mt-3">
-                    <p>Don't have an account? <a className="text-primary" href="signup.html">Sign
-                      up</a></p>
+                    <p>Don't have an account? <Link className="text-primary" to="/sign-up">Sign
+                      up</Link></p>
                   </div>
                 </div>
               </div>
