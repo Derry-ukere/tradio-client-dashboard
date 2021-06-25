@@ -13,6 +13,7 @@ import BankForm from './components/organism/BankForm';
 import CardForm from './components/organism/CardForm';
 import AddId from './components/molecule/settings/AddId';
 import Security from './components/molecule/settings/Security';
+import Success from './components/molecule/settings/Success';
 
 function Router() {
   return (
@@ -33,10 +34,7 @@ function Router() {
               <Route path='/card-form' exact component={CardForm} />
               <Route path='/add-id' exact component={AddId} />
               <Route path='/security' exact component={Security} />
-
-
-
-
+              <Route path='/success' exact component={Success} />
             </Switch>
           </Dashboard>
         </Route>

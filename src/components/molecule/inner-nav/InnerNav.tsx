@@ -26,15 +26,12 @@ const InnerNav = () => {
       <Link to="/account" className="dropdown-item">
         <i className="bi bi-house-door-fill"></i> Account
       </Link>
-      <Link to="/history" className="dropdown-item">
+      <Link to="/data" className="dropdown-item">
         <i className="bi bi-calendar2-date-fill"></i> History
       </Link>
       <Link to="/settings" className="dropdown-item">
         <i className="bi bi-gear-wide-connected"></i> Setting
       </Link>
-      {/* <Link to="lock.html" className="dropdown-item">
-        <i className="/lock" /> Lock
-      </Link> */}
       <Link to="/" className="dropdown-item logout">
         <i className="bi bi-file-person-fill"></i> Logout
       </Link>
