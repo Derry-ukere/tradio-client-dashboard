@@ -1,6 +1,45 @@
-import React from 'react';
-import {Link}  from 'react-router-dom';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import React,{useState,useEffect} from 'react';
+import {BeatLoader} from 'react-spinners';
+import { useHistory} from 'react-router-dom';
+import {Link} from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
+import {loadingAction} from '../../actions/login';
+import {RootState} from '../../store';
+
+
+
 const Login = () => {
+  const [email, setemail] = useState('');
+  const [password, setpassword] = useState('');
+
+  const dispatch = useDispatch();
+  const clientRegister = useSelector( (state : RootState) => state.login);
+  const {loading,error,payload} = clientRegister;
+  const history = useHistory();
+
+  useEffect(()=>{
+    if(payload){
+      history.push('/dashboard');
+    }
+    console.log('error',error);
+  },[dispatch,payload]);
+  
+
+  const handleSubmit = (e : {preventDefault : ()=> void})=>{
+    e.preventDefault();
+    dispatch(loadingAction.main(email,password));
+  };
+  
+  const onPaswwordChange = (e : {target : { value : any}}) =>{
+    setpassword(e.target.value);
+  };
+
+  const onEmailChange = (e : {target : { value : any}}) =>{
+    setemail(e.target.value);
+  };
+
+
   return (
     <div id="main-wrapper" className="show">
       <div className="authincation section-padding">
@@ -15,14 +54,14 @@ const Login = () => {
                   <h4 className="card-title">Sign in</h4>
                 </div>
                 <div className="card-body">
-                  <form method="post" name="myform" className="signin_validate" action="otp-1.html">
+                  <form  className="signin_validate" action="otp-1.html" onSubmit = {handleSubmit}>
                     <div className="form-group">
                       <label>Email</label>
-                      <input type="email" className="form-control" placeholder="hello@example.com" name="email" />
+                      <input type="email" className="form-control" placeholder="hello@example.com"  value = {email} onChange = {onEmailChange}/>
                     </div>
                     <div className="form-group">
                       <label>Password</label>
-                      <input type="password" className="form-control" placeholder="Password" name="password" />
+                      <input type="password" className="form-control" placeholder="Password"  value = {password} onChange = {onPaswwordChange}/>
                     </div>
                     <div className="form-row d-flex justify-content-between mt-4 mb-2">
                       <div className="form-group mb-0">
@@ -33,11 +72,11 @@ const Login = () => {
                         </label>
                       </div>
                       <div className="form-group mb-0">
-                        <a href="reset.html">Forgot Password?</a>
+                        <Link to="/forgot-password">Forgot Password?</Link>
                       </div>
                     </div>
                     <div className="text-center">
-                      <button type="submit" className="btn btn-success btn-block">Sign in</button>
+                      {loading ? <BeatLoader color = 'white' /> :<button type="submit" className="btn btn-success btn-block">Sign In</button>}
                     </div>
                   </form>
                   <div className="new-account mt-3">

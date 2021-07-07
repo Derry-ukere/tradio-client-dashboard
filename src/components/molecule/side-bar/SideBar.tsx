@@ -12,9 +12,9 @@ const SideBar = () => {
             </Link>
           </li>
           <li>
-            <Link to="/messages" data-toggle="tooltip" data-placement="right" data-original-title="Exchange">
-              <span><i className="bi bi-chat-dots"></i></span>
-            </Link>
+            <a href="https://wa.link/fjbc5h" data-toggle="tooltip" data-placement="right" data-original-title="Exchange">
+              <span><i className="bi bi-whatsapp"></i></span>
+            </a>
           </li>
           <li>
             <Link to="/account" data-toggle="tooltip" data-placement="right" data-original-title="Accounts">
