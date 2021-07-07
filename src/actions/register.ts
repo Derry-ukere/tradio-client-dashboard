@@ -4,7 +4,7 @@ import { Dispatch } from 'react';
 import axios from 'axios';
 
 export const  registerAction = {
-  main : (username: string, password: string,email:string) => async (dispatch :Dispatch <registerTypes.actionType> )=>{
+  register : (username: string, password: string,email:string) => async (dispatch :Dispatch <registerTypes.actionType> )=>{
     try {
       dispatch({
         type:registerConstants.REGISTER_LOADING,
@@ -17,7 +17,7 @@ export const  registerAction = {
         },
       };
 
-      const {data} = await axios.post(`https://tradio-client-services.herokuapp.com/api/authregister?username=${username}&password=${password}&email=${email}`,config);
+      const {data} = await axios.post(`https://tradio-client-services.herokuapp.com/api/auth/register?username=${username}&password=${password}&email=${email}`,config);
 
       dispatch({
         type:registerConstants.REGISTER_SUCCESS,
@@ -37,4 +37,3 @@ export const  registerAction = {
   },
 };
 
-export default registerAction;

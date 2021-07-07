@@ -1,18 +1,34 @@
-import React,{useState} from 'react';
+/* eslint-disable no-unused-vars */
+import React,{useState,useEffect} from 'react';
+import {BeatLoader} from 'react-spinners';
+import { useHistory} from 'react-router-dom';
 import {Link} from 'react-router-dom';
-// import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {registerAction} from '../../actions/register';
+import {RootState} from '../../store';
+
 
 const Signup = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setpassword] = useState('');
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const clientRegister = useSelector( (state : RootState) => state.register);
+  const {loading,error,payload} = clientRegister;
+  const history = useHistory();
  
 
   const handleSubmit = (e : {preventDefault : ()=> void}) =>{
     e.preventDefault();
-    console.log(username,email,password);
+    dispatch(registerAction.register(username,email,password));
   };
+
+  useEffect(()=>{
+    if(payload){
+      history.push('/dashboard');
+    }
+    console.log('error',error);
+  },[dispatch,payload]);
 
   return (
     <div id="main-wrapper" className="show">
@@ -42,7 +58,7 @@ const Signup = () => {
                       <input type="password" className="form-control" placeholder="Password" value = {password}  onChange = {(e) => setpassword(e.target.value)}/>
                     </div>
                     <div className="text-center mt-4">
-                      <button type="submit" className="btn btn-success btn-block">Sign up</button>
+                      {loading ? <BeatLoader color = 'white' /> :<button type="submit" className="btn btn-success btn-block">Sign up</button>}
                     </div>
                   </form>
                   <div className="new-account mt-3">

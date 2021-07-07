@@ -1,5 +1,11 @@
-import React,{useState} from 'react';
-import {Link}  from 'react-router-dom';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import React,{useState,useEffect} from 'react';
+import {BeatLoader} from 'react-spinners';
+import { useHistory} from 'react-router-dom';
+import {Link} from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
+import {loadingAction} from '../../actions/login';
+import {RootState} from '../../store';
 
 
 
@@ -7,13 +13,22 @@ const Login = () => {
   const [email, setemail] = useState('');
   const [password, setpassword] = useState('');
 
+  const dispatch = useDispatch();
+  const clientRegister = useSelector( (state : RootState) => state.login);
+  const {loading,error,payload} = clientRegister;
+  const history = useHistory();
 
-
-
+  useEffect(()=>{
+    if(payload){
+      history.push('/dashboard');
+    }
+    console.log('error',error);
+  },[dispatch,payload]);
+  
 
   const handleSubmit = (e : {preventDefault : ()=> void})=>{
     e.preventDefault();
-    console.log(email, password);
+    dispatch(loadingAction.main(email,password));
   };
   
   const onPaswwordChange = (e : {target : { value : any}}) =>{
@@ -61,7 +76,7 @@ const Login = () => {
                       </div>
                     </div>
                     <div className="text-center">
-                      <button type="submit" className="btn btn-success btn-block">Sign in</button>
+                      {loading ? <BeatLoader color = 'white' /> :<button type="submit" className="btn btn-success btn-block">Sign In</button>}
                     </div>
                   </form>
                   <div className="new-account mt-3">
