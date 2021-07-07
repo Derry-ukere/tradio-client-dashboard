@@ -10,7 +10,7 @@ const Success = () => {
               <span className="icon"><i className="bi bi-check-lg" /></span>
               <h4>Congratulation. Your bank added</h4>
               <p>Efficiently provide access to installed base core competencies and end end
-            data Interactively target equity.</p>
+               data Interactively target equity.</p>
             </div>
             <div className="text-center">
               <button type="submit" className="btn btn-success pl-5 pr-5">Continue</button>

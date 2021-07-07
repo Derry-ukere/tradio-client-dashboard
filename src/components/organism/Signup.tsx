@@ -1,7 +1,19 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {Link} from 'react-router-dom';
+// import {useDispatch, useSelector} from 'react-redux';
 
 const Signup = () => {
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setpassword] = useState('');
+  // const dispatch = useDispatch();
+ 
+
+  const handleSubmit = (e : {preventDefault : ()=> void}) =>{
+    e.preventDefault();
+    console.log(username,email,password);
+  };
+
   return (
     <div id="main-wrapper" className="show">
       <div className="authincation section-padding">
@@ -16,18 +28,18 @@ const Signup = () => {
                   <h4 className="card-title">Sign up your account</h4>
                 </div>
                 <div className="card-body">
-                  <form method="post" name="myform" className="signup_validate">
+                  <form   className="signup_validate" onSubmit = {handleSubmit}>
                     <div className="form-group">
                       <label>Username</label>
-                      <input type="text" className="form-control" placeholder="username" name="username" />
+                      <input type="text" className="form-control" placeholder="username" value = {username} onChange = {(e) => setUsername( e.target.value) }/>
                     </div>
                     <div className="form-group">
                       <label>Email</label>
-                      <input type="email" className="form-control" placeholder="hello@example.com" name="email" />
+                      <input type="email" className="form-control" placeholder="hello@example.com" value = {email}  onChange = {(e) => setEmail(e.target.value)}/>
                     </div>
                     <div className="form-group">
                       <label>Password</label>
-                      <input type="password" className="form-control" placeholder="Password" name="password" />
+                      <input type="password" className="form-control" placeholder="Password" value = {password}  onChange = {(e) => setpassword(e.target.value)}/>
                     </div>
                     <div className="text-center mt-4">
                       <button type="submit" className="btn btn-success btn-block">Sign up</button>
