@@ -23,7 +23,7 @@ export const  loginAction = {
         loading: false,
         payload:data
       });
-
+      localStorage.setItem('userInfo', JSON.stringify(data));
     } catch (error) {
       dispatch({
         type:LoginConstants.LOGIN_FAIL,
