@@ -18,7 +18,7 @@ export const  registerAction = {
       };
 
       const {data} = await axios.post(`https://tradio-client-services.herokuapp.com/api/auth/register?username=${username}&password=${password}&email=${email}`,config);
-
+     
       dispatch({
         type:registerConstants.REGISTER_SUCCESS,
         loading: false,

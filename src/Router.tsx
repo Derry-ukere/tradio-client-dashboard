@@ -14,6 +14,9 @@ import CardForm from './components/organism/CardForm';
 import AddId from './components/molecule/settings/AddId';
 import Security from './components/molecule/settings/Security';
 import Success from './components/molecule/settings/Success';
+import CompleteRegistration from './components/organism/CompleteRegistration';
+import CheckEmail from './components/organism/CheckEmail';
+import UpdatePassword from './components/organism/UpdataPassword';
 
 function Router() {
   return (
@@ -21,10 +24,13 @@ function Router() {
       <Switch>
         <Route path='/' exact component={Login} />
         <Route path='/sign-up' exact component={Signup} />
-        <Route path='/forgot-password' exact component={ForgetPassword} />
+        <Route path='/forgot-password' exact component={ForgetPassword} /> 
+        <Route path='/cofirm-email' exact component={CheckEmail} />        
+        <Route path="/completeregistration/:id"  exact component={CompleteRegistration}/>
+        <Route path="/resetPasswrod/:id"  exact component={UpdatePassword}/>
         <Route>
           <Dashboard>
-            <Switch>
+            <Switch> 
               <Route path='/dashboard' exact component={Welcome} />
               <Route path='/account' exact component={Profile} />
               <Route path='/data' exact component={Data} />
