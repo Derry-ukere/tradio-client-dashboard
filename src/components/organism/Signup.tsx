@@ -6,6 +6,8 @@ import {Link} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {registerAction} from '../../actions/register';
 import {RootState} from '../../store';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const Signup = () => {
@@ -24,14 +26,36 @@ const Signup = () => {
   };
 
   useEffect(()=>{
-    if(payload){
-      history.push('/dashboard');
+    if(payload?.message){
+      history.push('/cofirm-email');
     }
-    console.log('error',error);
-  },[dispatch,payload]);
+    if (error){
+      console.log(error);
+      toast.error('something went wrong', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+  },[dispatch,payload,error]);
 
   return (
     <div id="main-wrapper" className="show">
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div className="authincation section-padding">
         <div className="container h-100">
           <div className="row justify-content-center h-100 align-items-center">
@@ -46,16 +70,16 @@ const Signup = () => {
                 <div className="card-body">
                   <form   className="signup_validate" onSubmit = {handleSubmit}>
                     <div className="form-group">
-                      <label>Username</label>
-                      <input type="text" className="form-control" placeholder="username" value = {username} onChange = {(e) => setUsername( e.target.value) }/>
+                      <label>Full Name</label>
+                      <input type="text" className="form-control" placeholder="username" required value = {username} onChange = {(e) => setUsername( e.target.value) }/>
                     </div>
                     <div className="form-group">
                       <label>Email</label>
-                      <input type="email" className="form-control" placeholder="hello@example.com" value = {email}  onChange = {(e) => setEmail(e.target.value)}/>
+                      <input type="email" className="form-control" placeholder="hello@example.com" required value = {email}  onChange = {(e) => setEmail(e.target.value)}/>
                     </div>
                     <div className="form-group">
                       <label>Password</label>
-                      <input type="password" className="form-control" placeholder="Password" value = {password}  onChange = {(e) => setpassword(e.target.value)}/>
+                      <input type="password" className="form-control" placeholder="Password" required value = {password}  onChange = {(e) => setpassword(e.target.value)}/>
                     </div>
                     <div className="text-center mt-4">
                       {loading ? <BeatLoader color = 'white' /> :<button type="submit" className="btn btn-success btn-block">Sign up</button>}

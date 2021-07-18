@@ -3,7 +3,7 @@ import * as LoginConstants from '../constants/login';
 import { Dispatch } from 'react';
 import axios from 'axios';
 
-export const  loadingAction = {
+export const  loginAction = {
   main : (email: string, password: string) => async (dispatch :Dispatch <LoginTypes.actionType> )=>{
     try {
       dispatch({
@@ -17,12 +17,13 @@ export const  loadingAction = {
         },
       };
       const {data} = await axios.post(`https://tradio-client-services.herokuapp.com/api/auth/login?email=${email}&password=${password}`,config);
+
       dispatch({
         type:LoginConstants.LOGIN_SUCCESS,
         loading: false,
         payload:data
       });
-        
+
     } catch (error) {
       dispatch({
         type:LoginConstants.LOGIN_FAIL,
@@ -35,4 +36,4 @@ export const  loadingAction = {
   },
 };
 
-export default loadingAction;
+export default loginAction;

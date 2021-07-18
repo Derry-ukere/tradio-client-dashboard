@@ -1,26 +1,43 @@
-import React from 'react';
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import React,{useEffect} from 'react';
 import { Link } from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
+// import {loadingAction} from '../actions/login';
+import {RootState} from '../../../store';
 
 const InnerNav = () => {
+  const dispatch = useDispatch();
+  const client = useSelector( (state : RootState) => state.login);
+  const {loading,error,payload} = client ;
+  // const history = useHistory();
+  const email = payload?.data.email;
+  const username = payload?.data.username;
+  const balance = payload?.data.wallet.availableBtc;
+  
+  // useEffect(()=>{
+  //   console.log('payload is --',payload?.data.email);
+  // },[]);
+
   return (
     <div className="dropdown-menu dropdown-menu-right show">
       <div className="user-email">
         <div className="user">
           <span className="thumb"><i className="bi bi-person"></i></span>
           <div className="user-info">
-            <h6>Saiful Islam</h6>
-            <span>quixlab.com@gmail.com</span>
+            <h6>{username}</h6>
+            <span>{email}</span>
           </div>
         </div>
       </div>
       <div className="user-balance">
         <div className="available">
           <p>Available</p>
-          <span>0.00 USD</span>
+          <span>{balance} USD</span>
         </div>
         <div className="total">
           <p>Total</p>
-          <span>0.00 USD</span>
+          <span>{balance} USD</span>
         </div>
       </div>
       <Link to="/account" className="dropdown-item">

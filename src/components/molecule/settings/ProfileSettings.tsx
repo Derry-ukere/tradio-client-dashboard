@@ -1,6 +1,50 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
+import {BeatLoader} from 'react-spinners';
+import { useHistory} from 'react-router-dom';
+// import {Link} from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
+import {UpdateEmailAndPassword} from '../../../actions/updateEmailAndPassword';
+import {RootState} from '../../../store';
 
 const ProfileSettings = () => {
+  const dispatch = useDispatch();
+  const clientRegister = useSelector( (state : RootState) => state.login);
+  const updatePasswordandEmail = useSelector( (state : RootState) => state.UpdateEmailAndPassword);
+
+  const {payload} = clientRegister;
+  const{loading,error,updatePasswordpayload} = updatePasswordandEmail;
+
+  const history = useHistory();
+
+  useEffect(()=>{
+    if(!payload){
+      history.push('/');
+    }
+    if(updatePasswordpayload){
+      console.log(updatePasswordpayload);
+      console.log(loading);
+
+    }
+    console.log('error',error);
+  },[dispatch,payload,updatePasswordpayload,loading]);
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const id = payload?.data._id;
+
+
+
+  const updateEmailAndPassword = (e : {preventDefault : () => void}) =>{
+    e.preventDefault();
+    console.log(email,password,id);
+    if(id){
+      dispatch(UpdateEmailAndPassword.update(id,email,password));
+    }
+    
+  };
+
+
+
   return (
     <div className="col-xl-12">
       <div className="row">
@@ -43,21 +87,21 @@ const ProfileSettings = () => {
               <h4 className="card-title">User Profile</h4>
             </div>
             <div className="card-body">
-              <form action="#">
+              <form onSubmit = {updateEmailAndPassword}>
                 <div className="form-row">
                   <div className="form-group col-xl-12">
                     <label className="mr-sm-2">New Email</label>
-                    <input type="email" className="form-control" placeholder="Email" />
+                    <input type="email" className="form-control" value = {email} placeholder="Email"  onChange = {(e) => setEmail(e.target.value)} />
                   </div>
                   <div className="form-group col-xl-12">
                     <label className="mr-sm-2">New Password</label>
-                    <input type="password" className="form-control" placeholder="**********" />
+                    <input type="password" className="form-control" value = {password}  placeholder="**********" onChange = {(e) => setPassword(e.target.value)} />
                     <p className="mt-2 mb-0">Enable two factor authencation on the security
                     page
                     </p>
                   </div>
                   <div className="col-12">
-                    <button className="btn btn-success waves-effect px-4">Save</button>
+                    <button className="btn btn-success waves-effect px-4">{loading ? <BeatLoader /> : updatePasswordpayload ? 'Detail Updated' : 'Save'}</button>
                   </div>
                 </div>
               </form>

@@ -4,9 +4,10 @@ import {BeatLoader} from 'react-spinners';
 import { useHistory} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
-import {loadingAction} from '../../actions/login';
+import {loginAction} from '../../actions/login';
 import {RootState} from '../../store';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const Login = () => {
@@ -17,18 +18,41 @@ const Login = () => {
   const clientRegister = useSelector( (state : RootState) => state.login);
   const {loading,error,payload} = clientRegister;
   const history = useHistory();
+  
 
   useEffect(()=>{
-    if(payload){
+    console.log('location',location);
+    if(payload && payload.data.overview.emailVerified){
       history.push('/dashboard');
+    }else{
+      toast.error('comfirm email address before login', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
-    console.log('error',error);
-  },[dispatch,payload]);
+    if (error){
+      toast.error('something went wrong, Comfirm login details', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+  },[dispatch,payload?.data.overview.emailVerified,error]);
   
 
   const handleSubmit = (e : {preventDefault : ()=> void})=>{
     e.preventDefault();
-    dispatch(loadingAction.main(email,password));
+    dispatch(loginAction.main(email,password));
+
   };
   
   const onPaswwordChange = (e : {target : { value : any}}) =>{
@@ -38,10 +62,19 @@ const Login = () => {
   const onEmailChange = (e : {target : { value : any}}) =>{
     setemail(e.target.value);
   };
-
-
   return (
     <div id="main-wrapper" className="show">
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div className="authincation section-padding">
         <div className="container h-100">
           <div className="row justify-content-center h-100 align-items-center">
@@ -57,11 +90,11 @@ const Login = () => {
                   <form  className="signin_validate" action="otp-1.html" onSubmit = {handleSubmit}>
                     <div className="form-group">
                       <label>Email</label>
-                      <input type="email" className="form-control" placeholder="hello@example.com"  value = {email} onChange = {onEmailChange}/>
+                      <input type="email" className="form-control" placeholder="hello@example.com" required value = {email} onChange = {onEmailChange}/>
                     </div>
                     <div className="form-group">
                       <label>Password</label>
-                      <input type="password" className="form-control" placeholder="Password"  value = {password} onChange = {onPaswwordChange}/>
+                      <input type="password" className="form-control" placeholder="Password" required value = {password} onChange = {onPaswwordChange}/>
                     </div>
                     <div className="form-row d-flex justify-content-between mt-4 mb-2">
                       <div className="form-group mb-0">
