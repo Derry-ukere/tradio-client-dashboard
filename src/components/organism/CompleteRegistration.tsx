@@ -21,7 +21,8 @@ const Complete = () => {
   const [permAdress, setpermAdress] = useState('');
   const [city, setCity] = useState('');
   const [pCode, setpCode] = useState('');
-  const [country, setcountry] = useState('');
+  const [country, setcountry] = useState(''); 
+  const [tel, setel] = useState(''); 
 
 
   const dispatch = useDispatch();
@@ -41,12 +42,10 @@ const Complete = () => {
 
   const handleSubmit = (e : {preventDefault : ()=> void})=>{
     e.preventDefault();
-    dispatch(registerAction.register(id,name,dob,preAdress, permAdress, city, pCode,image, country));
+    dispatch(registerAction.register(id,name,dob,preAdress, permAdress, city, pCode,tel, country));
   };
   
-  const handleImageChange = () =>{
-    setimage('path from server');
-  };
+  
 
 
   return (
@@ -65,7 +64,7 @@ const Complete = () => {
                     <input type="text" className="form-control" placeholder="enter full name" value = {name} onChange = {(e) => setname(e.target.value)} />
                   </div>
                   <div className="file-upload-wrapper" data-text="Change Photo">
-                    <input name="file-upload-field" type="file" className="file-upload-field"  onChange = {handleImageChange}/>
+                    <input name="text" type="file" className="file-upload-field"   value = {tel} onChange= {(e) => setel(e.target.value)}/>
                   </div>
                   <div className="form-group col-xl-6 col-md-6">
                     <label className="mr-sm-2">Date of birth</label>

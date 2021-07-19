@@ -1,4 +1,4 @@
-import { LOGIN_FAIL,LOGIN_LOADING,LOGIN_SUCCESS } from '../constants/login';
+import {UPDATE_PAYMENT_FAIL,UPDATE_PAYMENT_LOADING,UPDATE_PAYMENT_SUCCESS} from '../constants/updatePayment';
 
 export interface res {
   data: {
@@ -51,32 +51,27 @@ export interface res {
     token: string
 }
  
-
-export interface LOGIN_FAIL {
-    type: typeof LOGIN_FAIL
+export interface UPDATE_PAYMENT_FAIL {
+    type: typeof UPDATE_PAYMENT_FAIL
     loading: boolean,
     error: typeof Error
 }
 
-export interface LOGIN_LOADING {
-    type: typeof LOGIN_LOADING
+export interface UPDATE_PAYMENT_LOADING {
+    type: typeof UPDATE_PAYMENT_LOADING
     loading: boolean,
-
 }
 
+export type actionType = UPDATE_PAYMENT_FAIL | UPDATE_PAYMENT_LOADING | UPDATE_PAYMENT_SUCCESS;
 
-
-export type actionType = LOGIN_FAIL | LOGIN_LOADING | LOGIN_SUCCESS;
-
-
-export interface LOGIN_SUCCESS {
-    type: typeof LOGIN_SUCCESS,
+export interface UPDATE_PAYMENT_SUCCESS {
+    type: typeof UPDATE_PAYMENT_SUCCESS,
     loading: boolean,
-    payload: res
+    updatepayload: res
 }
 export interface initalState {
     loading: boolean,
-    payload?: res,
+    updatepayload?: res,
     error?: typeof Error
 
 }
