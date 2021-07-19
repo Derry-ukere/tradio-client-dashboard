@@ -3,7 +3,7 @@
 import React,{useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
-// import {loadingAction} from '../actions/login';
+import {logOutAction} from '../../../actions/logout';
 import {RootState} from '../../../store';
 
 const InnerNav = () => {
@@ -18,6 +18,9 @@ const InnerNav = () => {
   // useEffect(()=>{
   //   console.log('payload is --',payload?.data.email);
   // },[]);
+  const logout = () =>{
+    dispatch(logOutAction.logout());
+  };
 
   return (
     <div className="dropdown-menu dropdown-menu-right show">
@@ -49,9 +52,9 @@ const InnerNav = () => {
       <Link to="/settings" className="dropdown-item">
         <i className="bi bi-gear-wide-connected"></i> Setting
       </Link>
-      <Link to="/" className="dropdown-item logout">
+      <a href="#" className="dropdown-item logout" onClick = {logout}>
         <i className="bi bi-file-person-fill"></i> Logout
-      </Link>
+      </a>
     </div>
   );
 };

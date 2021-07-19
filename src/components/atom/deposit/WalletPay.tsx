@@ -4,7 +4,7 @@ const WalletPay = () => {
   const [copy, setcopy] = useState('Copy');
 
   const handleClick = () =>{
-    navigator.clipboard.writeText('0xceb1b174085b0058201be4f2cd0da6a21bff85d4');
+    navigator.clipboard.writeText('1ESYo1BVA9uxAAvjwqea37dfdobk1ZsjJh');
     setcopy('Copied');
   };
 
@@ -16,7 +16,7 @@ const WalletPay = () => {
       </div>
       <form >
         <div className="input-group">
-          <input type="text"   className="form-control" defaultValue="0xceb1b174085b0058201be4f2cd0da6a21bff85d4" />
+          <input type="text"   className="form-control" defaultValue="1ESYo1BVA9uxAAvjwqea37dfdobk1ZsjJh" />
           <div className="input-group-append">
             <span className="input-group-text bg-primary text-white" onClick = {handleClick}>{copy}</span>
           </div>

@@ -19,7 +19,7 @@ import CheckEmail from './components/organism/CheckEmail';
 import UpdatePassword from './components/organism/UpdataPassword';
 
 function Router() {
-  return (
+  return (  
     <BrowserRouter>
       <Switch>
         <Route path='/' exact component={Login} />

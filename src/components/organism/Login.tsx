@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React,{useState,useEffect} from 'react';
+import React,{useState,useEffect,useRef} from 'react';
 import {BeatLoader} from 'react-spinners';
+// eslint-disable-next-line no-unused-vars
 import { useHistory} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
@@ -13,46 +14,57 @@ import 'react-toastify/dist/ReactToastify.css';
 const Login = () => {
   const [email, setemail] = useState('');
   const [password, setpassword] = useState('');
+  // eslint-disable-next-line no-unused-vars
+  const [check, setCheck] = useState(false);
 
   const dispatch = useDispatch();
   const clientRegister = useSelector( (state : RootState) => state.login);
   const {loading,error,payload} = clientRegister;
   const history = useHistory();
+  const isMounted = useRef(null);
+  const data  = localStorage.getItem('userInfo');
+  let userInfoFromStorage: any;
+  if(data){
+    // eslint-disable-next-line no-unused-vars
+    userInfoFromStorage = JSON.parse(data);
+  }
   
 
+ 
   useEffect(()=>{
-    console.log('location',location);
-    if(payload && payload.data.overview.emailVerified){
-      history.push('/dashboard');
-    }else{
-      toast.error('comfirm email address before login', {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-    }
-    if (error){
-      toast.error('something went wrong, Comfirm login details', {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+    if (isMounted) {
+      if(payload && payload.data.overview.emailVerified){
+        history.push('/dashboard');
+      }else{
+        toast.error('comfirm email address before login', {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+      if (error){
+        toast.error('something went wrong, Comfirm login details', {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
     }
   },[dispatch,payload?.data.overview.emailVerified,error]);
   
 
   const handleSubmit = (e : {preventDefault : ()=> void})=>{
     e.preventDefault();
-    dispatch(loginAction.main(email,password));
-
+    dispatch(loginAction.main(email,password)); 
+    // setCheck((prev) => !prev);    
   };
   
   const onPaswwordChange = (e : {target : { value : any}}) =>{
@@ -63,7 +75,7 @@ const Login = () => {
     setemail(e.target.value);
   };
   return (
-    <div id="main-wrapper" className="show">
+    <div id="main-wrapper" className="show" >
       <ToastContainer
         position="top-right"
         autoClose={5000}
@@ -75,7 +87,7 @@ const Login = () => {
         draggable
         pauseOnHover
       />
-      <div className="authincation section-padding">
+      <div className="authincation section-padding" ref = {isMounted}>
         <div className="container h-100">
           <div className="row justify-content-center h-100 align-items-center">
             <div className="col-xl-5 col-md-6">
