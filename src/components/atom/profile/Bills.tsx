@@ -1,32 +1,44 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import React from 'react';
-import { res} from '../../../interfaces/login';
-const userInfoFromStorage  = localStorage.getItem('userInfo');
+import React,{useEffect} from 'react';
+// import { res} from '../../../interfaces/login';
 import {percentage} from '../../../helpers/helpers';
 
-const userStorage : res = JSON.parse(userInfoFromStorage || '{}' );
-// if(userInfoFromStorage) {
-//   userStorage 
-// }
-  
-const wallet = userStorage.data.wallet;
-const {availableBtc,availableMargin} = wallet;
 
   
-const balance = availableBtc + 0.0230145;
-const total = availableBtc + availableMargin;
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-// eslint-disable-next-line no-unused-vars
-const margin = total + balance;
-// const thisMont = lastDeposit + margin;
-const maintenance = percentage(balance, 10);
-const Unrealized = maintenance/2;
-// const Unrealizedtwo = maintenance-0.2;
-const Unrealizedthree = maintenance/1.2 * 0.002;
+
 
 
 
 const Bills = () => {
+  const data  = localStorage.getItem('userInfo');
+  let userInfoFromStorage: any;
+  if(data){
+    // eslint-disable-next-line no-unused-vars
+    userInfoFromStorage = JSON.parse(data);
+  }
+
+  const wallet =  userInfoFromStorage.data.wallet;
+
+  const {availableBtc,availableMargin} = wallet;
+
+  
+  const balance = availableBtc + 0.0230145;
+  const total = availableBtc + availableMargin + 0.0230145;
+ 
+  const margin = total + balance;
+  // const thisMont = lastDeposit + margin;
+  const maintenance = percentage(balance, 10);
+  const Unrealized = maintenance/2;
+  // const Unrealizedtwo = maintenance-0.2;
+  const Unrealizedthree = maintenance/1.2 * 0.002;
+
+  useEffect(()=>{
+    console.log('marginefrom bills', margin);
+  },[]);
+
+
+
+
+
   return (
     <div className="col-xl-12">
       <div className="row">
