@@ -1,41 +1,31 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable quotes */
-import React,{useState}  from 'react';
+import React,{useState,useEffect}  from 'react';
 import {usePaystackPayment  } from 'react-paystack';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import Success from '../../molecule/settings/Success';
+import {useDispatch, useSelector} from 'react-redux';
+import {RootState} from '../../../store';
+import {UpdateEmailAndPassword} from '../../../actions/updateBalanceAction';
+import {res} from '../../../interfaces/login';
 
 
-const onClose = () => {
-  // implementation for  whatever you want to do when the Paystack dialog closed.
-  toast.error('something went wrong', {
-    position: 'top-right',
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-  });
-};
-
-const onSuccess = (reference : any) => {
-  console.log(reference);
-  toast.success('payment was succesfull', {
-    position: 'top-right',
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-  });
-};
 
 
 const DebitCard = () => {
   const [amount, setAmount] = useState(0);
+  const dispatch = useDispatch();
+  const clientRegister = useSelector( (state : RootState) => state.UpdatePayment);
+  const {loading,error,updatepayload} = clientRegister;
+  const data  = localStorage.getItem('userInfo');
+  let userInfoFromStorage: any;
+  if(data){
+    // eslint-disable-next-line no-unused-vars
+    userInfoFromStorage = JSON.parse(data);
+  }
 
+  const id =  userInfoFromStorage.data._id;
   const config = {
     reference: (new Date()).getTime().toString(),
     email: "mudiagaukere@gmail.com.com",
@@ -43,7 +33,33 @@ const DebitCard = () => {
     publicKey: 'pk_live_d430284c765414ce072328e84db6249327a70e1c',
 
   };
-
+  const onClose = () => {
+    // implementation for  whatever you want to do when the Paystack dialog closed.
+    toast.error('something went wrong', {
+      position: 'top-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
+  
+  const onSuccess = (reference : any) => {
+    console.log(reference);
+    toast.success('payment was succesfull', {
+      position: 'top-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+    dispatch(UpdateEmailAndPassword.update(id,amount));
+  };
+  
   const initializePayment = usePaystackPayment(config);
 
   
@@ -56,6 +72,10 @@ const DebitCard = () => {
     console.log('amount is --', amount);
     initializePayment(onSuccess, onClose);
   };
+
+  // useEffect(() =>{
+  //   console.log('data', userInfoFromStorage.data._id);
+  // },[]);
 
   return (
     <div className="tab-pane fade active show" id="tab1">
