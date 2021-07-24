@@ -11,7 +11,7 @@ const CheckEmail = () => {
                 <div className="identity-content">
                   <span className="icon"><i className="bi bi-check-lg" /></span>
                   <h4>Congratulation. Your registration was successfull</h4>
-                  <p>Check your email address to complete your registration</p>
+                  <p>Check your email address to complete your registration.Message typically arrives in less than 3 mins, kindly check your inbox or spam.</p>
                 </div>
               </form>
             </div>

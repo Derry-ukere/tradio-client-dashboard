@@ -17,7 +17,7 @@ interface token {
 
 const Complete = () => {
   const [name, setname] = useState('');
-  const [image, setimage] = useState('');
+  // const [image, setimage] = useState('');
   const [dob, setdate] = useState('');
   const [preAdress, setpreAdress] = useState('');
   const [permAdress, setpermAdress] = useState('');
@@ -60,6 +60,7 @@ const Complete = () => {
   const handleSubmit = (e : {preventDefault : ()=> void})=>{
     e.preventDefault();
     dispatch(registerAction.register(id,name,dob,preAdress, permAdress, city, pCode,tel, country));
+    // console.log(id,name,dob,preAdress, permAdress, city, pCode,tel, country);
   };
   
   
@@ -91,8 +92,9 @@ const Complete = () => {
                     <label className="mr-sm-2">Your Name</label>
                     <input type="text" className="form-control" placeholder="enter full name" value = {name} onChange = {(e) => setname(e.target.value)} />
                   </div>
-                  <div className="file-upload-wrapper" data-text="Change Photo">
-                    <input name="text" type="file" className="file-upload-field"   value = {tel} onChange= {(e) => setel(e.target.value)}/>
+                  <div className="form-group col-xl-6 col-md-6">
+                    <label className="mr-sm-2">Your Phone Number</label>
+                    <input type="text" className="form-control" placeholder="enter phone number" value = {tel} onChange = {(e) => setel(e.target.value)} />
                   </div>
                   <div className="form-group col-xl-6 col-md-6">
                     <label className="mr-sm-2">Date of birth</label>
