@@ -35,36 +35,42 @@ const Login = () => {
     if (isMounted) {
       if(payload && payload.data.overview.emailVerified){
         history.push('/dashboard');
-      }else{
-        toast.error('comfirm email address before login', {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-      }
-      if (error){
-        toast.error('something went wrong, Comfirm login details', {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
       }
     }
-  },[dispatch,payload?.data.overview.emailVerified,error]);
+  },[dispatch,payload?.data.overview.emailVerified]);
   
+  useEffect(() =>{
+    if (error){
+      toast.error('something went wrong, Comfirm login details', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+  }, [error]);
+
+  useEffect(() =>{
+    if (check && !payload?.data.overview.emailVerified ){
+      toast.error('comfirm email address before login', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+  }, [payload]);
 
   const handleSubmit = (e : {preventDefault : ()=> void})=>{
     e.preventDefault();
     dispatch(loginAction.main(email,password)); 
-    // setCheck((prev) => !prev);    
+    setCheck(true);    
   };
   
   const onPaswwordChange = (e : {target : { value : any}}) =>{

@@ -34,11 +34,7 @@ const Bills = () => {
   useEffect(()=>{
     console.log('marginefrom bills', margin);
   },[]);
-
-
-
-
-
+  
   return (
     <div className="col-xl-12">
       <div className="row">
