@@ -7,6 +7,8 @@ import {Link} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {registerAction} from '../../actions/completeRegistration';
 import {RootState} from '../../store';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 interface token {
@@ -38,6 +40,21 @@ const Complete = () => {
     }
     console.log('error',error);
   },[dispatch,payload]);
+
+  useEffect(()=>{
+    if(error){
+      toast.error('something went wrong, try again later', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+    
+  },[dispatch,error]);
   
 
   const handleSubmit = (e : {preventDefault : ()=> void})=>{
@@ -50,6 +67,17 @@ const Complete = () => {
 
   return (
     <div className="col-xl-12">
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div className="row">
         <div className="col-xl-12">
           <div className="card">
@@ -91,7 +119,7 @@ const Complete = () => {
                     <input type="text" className="form-control" placeholder="Enter Country"  value = {country} onChange = {(e) => setcountry(e.target.value)}/>
                   </div>
                   <div className="form-group col-12">
-                    <button className="btn btn-success px-4">Save</button>
+                    {loading ? <BeatLoader color = 'white' /> : <button className="btn btn-success px-4">Save</button>}
                   </div>
                 </div>
               </form>
