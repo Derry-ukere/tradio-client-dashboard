@@ -35,9 +35,17 @@ const Complete = () => {
 
   useEffect(()=>{
     if(payload){
+      toast.success('Registration complete', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       history.push('/');
     }
-    console.log('error',error);
   },[dispatch,payload]);
 
   useEffect(()=>{

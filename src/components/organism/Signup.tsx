@@ -22,6 +22,9 @@ const Signup = () => {
 
   const handleSubmit = (e : {preventDefault : ()=> void}) =>{
     e.preventDefault();
+    console.log('name is --',username);
+    console.log('email is --',email);
+    console.log('password is --',password);
     dispatch(registerAction.register(username,email,password));
   };
 
