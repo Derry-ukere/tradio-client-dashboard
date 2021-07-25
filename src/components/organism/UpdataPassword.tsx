@@ -31,8 +31,21 @@ const Complete = () => {
 
   useEffect(()=>{
     if(paswrdResetpayload?.overview){
+      toast.success('password reset was successfull', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      
       history.push('/');
-    }
+    } 
+  },[dispatch,paswrdResetpayload?.overview]);
+
+  useEffect(()=>{
     if(error) {
       toast.error('something went wrong, try again', {
         position: 'top-right',
@@ -44,7 +57,7 @@ const Complete = () => {
         progress: undefined,
       });
     }
-  },[dispatch,paswrdResetpayload?.overview]);
+  },[dispatch,error]);
   
 
   const handleSubmit = (e : {preventDefault : ()=> void})=>{
@@ -100,7 +113,7 @@ const Complete = () => {
                     <input type="password" className="form-control" placeholder="re - enter password" value = {passwordtwo} onChange = {(e) => setPasswordtwo(e.target.value)} />
                   </div>
                   <div className="form-group col-12">
-                    <button className="btn btn-success px-4">Save</button>
+                    {loading ? <BeatLoader color = 'white' /> : <button className="btn btn-success px-4">Save</button>}
                   </div>
                 </div>
               </form>
