@@ -1,8 +1,20 @@
-import React from 'react';
+import React,{useEffect} from 'react';
+import {getData} from '../../../lib/utils';
+import { res} from '../../../interfaces/login';
+
+
 
 const ColFive = () => {
+  const data : res = getData();
+  const {availableBtc} = data.data.wallet;
+
+
+
+  useEffect(()=>{
+    console.log('data,', data);
+  },[]);
+
   return (
-    
     <div className="col-xl-2 col-lg-4 col-xxl-4">
       <div className="card">
         <div className="card-header">
@@ -10,7 +22,7 @@ const ColFive = () => {
         </div>
         <div className="card-body balance-widget ps ps--active-y">
           <div className="total-balance">
-            <h3>$ 63411.00</h3>
+            <h3>$ {availableBtc}</h3>
             <h6>Total Balance</h6>
           </div>
           <div className="table-responsive">

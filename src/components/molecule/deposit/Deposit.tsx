@@ -1,32 +1,32 @@
 import React, {useState} from 'react';
 import WalletPay from '../../atom/deposit/WalletPay';
 import BitPay from '../../atom/deposit/BitPay';
-import DebitCard from '../../atom/deposit/DebitCard';
+// import DebitCard from '../../atom/deposit/DebitCard';
 import Heaader from '../../atom/deposit/Heaader';
 import Title from '../../atom/deposit/Title';
 
 const Deposit = () => {
 
-  const [showDebitCard, setshowDebitCard] = useState(true);
+  // const [showDebitCard, setshowDebitCard] = useState(true);
   const [showBitPay, setshowBitPay] = useState(false);
-  const [showWalet, setshowWalet] = useState(false);
+  const [showWalet, setshowWalet] = useState(true);
 
  
 
   const handleDebitCard = () =>{
     setshowWalet(false);
     setshowBitPay(false);
-    setshowDebitCard(prev => !prev);
+    // setshowDebitCard(prev => !prev);
   };
   
   const handleBitpay = () =>{
-    setshowDebitCard(false);
+    // setshowDebitCard(false);
     setshowWalet(false);
     setshowBitPay(true);
   };
 
   const handleWalet = () =>{
-    setshowDebitCard(false);
+    // setshowDebitCard(false);
     setshowBitPay(false);
     setshowWalet(true);
   };
@@ -38,7 +38,7 @@ const Deposit = () => {
         <div className="card-body" id="deposits">
           <Heaader Walet = {handleWalet} BitPay = {handleBitpay} DebitCard = {handleDebitCard}/>
           <div className="tab-content"> 
-            {showDebitCard && <DebitCard />}
+            {/* {showDebitCard && <DebitCard />} */}
             {showBitPay && <BitPay />}
             {showWalet && <WalletPay />}
           </div>
