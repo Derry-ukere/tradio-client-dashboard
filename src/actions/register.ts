@@ -23,7 +23,6 @@ export const  registerAction = {
         loading: false,
         payload:data
       });
-      localStorage.setItem('userInfo', JSON.stringify(data));
     } catch (error) {
       dispatch({
         type:registerConstants.REGISTER_FAIL,

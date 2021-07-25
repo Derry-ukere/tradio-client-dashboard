@@ -21,9 +21,8 @@ const Complete = () => {
   const [preAdress, setpreAdress] = useState('');
   const [permAdress, setpermAdress] = useState('');
   const [city, setCity] = useState('');
-  const [pCode, setpCode] = useState('');
   const [country, setcountry] = useState(''); 
-  const [tel, setel] = useState(''); 
+  const [tel, setTel] = useState(''); 
 
 
   const dispatch = useDispatch();
@@ -66,7 +65,8 @@ const Complete = () => {
 
   const handleSubmit = (e : {preventDefault : ()=> void})=>{
     e.preventDefault();
-    dispatch(registerAction.register(id,name,dob,preAdress, permAdress, city, pCode,tel, country));
+    const teleph = Number(tel);
+    dispatch(registerAction.register(id,name,preAdress, dob, permAdress,teleph,city, country));
   };
   
   
@@ -100,7 +100,7 @@ const Complete = () => {
                   </div>
                   <div className="form-group col-xl-6 col-md-6">
                     <label className="mr-sm-2">Your Phone Number</label>
-                    <input type="text" className="form-control" placeholder="enter phone number" value = {tel} onChange = {(e) => setel(e.target.value)} />
+                    <input type="number" className="form-control" placeholder="enter phone number" value = {tel} onChange = {(e) => setTel(e.target.value)} /> 
                   </div>
                   <div className="form-group col-xl-6 col-md-6">
                     <label className="mr-sm-2">Date of birth</label>
@@ -117,10 +117,6 @@ const Complete = () => {
                   <div className="form-group col-xl-6 col-md-6">
                     <label className="mr-sm-2">City</label>
                     <input type="text" className="form-control" placeholder="New York" value = {city} onChange = {(e) => setCity(e.target.value)} />
-                  </div>
-                  <div className="form-group col-xl-6 col-md-6">
-                    <label className="mr-sm-2">Postal Code</label>
-                    <input type="text" className="form-control" placeholder="25481" value = {pCode} onChange = {(e) => setpCode(e.target.value)}/>
                   </div>
                   <div className="form-group col-xl-6 col-md-6">
                     <label className="mr-sm-2">Country </label>
