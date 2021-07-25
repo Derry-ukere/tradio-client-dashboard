@@ -17,7 +17,6 @@ interface token {
 
 const Complete = () => {
   const [name, setname] = useState('');
-  // const [image, setimage] = useState('');
   const [dob, setdate] = useState('');
   const [preAdress, setpreAdress] = useState('');
   const [permAdress, setpermAdress] = useState('');
@@ -60,7 +59,6 @@ const Complete = () => {
   const handleSubmit = (e : {preventDefault : ()=> void})=>{
     e.preventDefault();
     dispatch(registerAction.register(id,name,dob,preAdress, permAdress, city, pCode,tel, country));
-    // console.log(id,name,dob,preAdress, permAdress, city, pCode,tel, country);
   };
   
   
