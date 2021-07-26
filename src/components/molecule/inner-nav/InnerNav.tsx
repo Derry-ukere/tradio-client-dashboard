@@ -35,11 +35,11 @@ const InnerNav = () => {
       </div>
       <div className="user-balance">
         <div className="available">
-          <p>Available</p>
+          <p>Capital</p>
           <span>{balance} USD</span>
         </div>
         <div className="total">
-          <p>Total</p>
+          <p>Profit</p>
           <span>{balance} USD</span>
         </div>
       </div>

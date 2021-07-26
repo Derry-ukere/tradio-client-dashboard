@@ -5,6 +5,9 @@ import { useHistory} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {UpdateEmailAndPassword} from '../../../actions/updateEmailAndPassword';
 import {RootState} from '../../../store';
+import Avatar from 'react-avatar';
+import {getData} from '../../../lib/utils';
+
 
 const ProfileSettings = () => {
   const dispatch = useDispatch();
@@ -16,15 +19,20 @@ const ProfileSettings = () => {
 
   const history = useHistory();
 
+  const clientsInformation = getData();
+  const name =  clientsInformation.data.overview.name;
+
   useEffect(()=>{
     if(!payload){
       history.push('/');
     }
     if(updatePasswordpayload){
       console.log(updatePasswordpayload);
+      console.log('clientsInformation',);
       console.log(loading);
 
     }
+    console.log('clientsInformation', clientsInformation.data.overview.name);
     console.log('error',error);
   },[dispatch,payload,updatePasswordpayload,loading]);
 
@@ -62,19 +70,16 @@ const ProfileSettings = () => {
                   </div>
                   <div className="form-group col-xl-12">
                     <div className="media align-items-center mb-3">
-                      <img className="mr-3 rounded-circle mr-0 mr-sm-3" src="https://demo.themefisher.com/tradio/images/profile/2.png" width={50} height={50} alt="" />
+                      <Avatar name={name}  className="mr-3 rounded-circle mr-0 mr-sm-3" />
                       <div className="media-body">
                         <h5 className="mb-0">John Doe</h5>
                         <p className="mb-0">Max file size is 20mb
                         </p>
                       </div>
                     </div>
-                    <div className="file-upload-wrapper" data-text="Change Photo">
-                      <input name="file-upload-field" type="file" className="file-upload-field" />
-                    </div>
                   </div>
                   <div className="col-12">
-                    <button className="btn btn-success waves-effect px-4">Save</button>
+                    <button className="btn btn-success waves-effect px-4">Update</button>
                   </div>
                 </div>
               </form>
@@ -101,7 +106,7 @@ const ProfileSettings = () => {
                     </p>
                   </div>
                   <div className="col-12">
-                    <button className="btn btn-success waves-effect px-4">{loading ? <BeatLoader /> : updatePasswordpayload ? 'Detail Updated' : 'Save'}</button>
+                    <button className="btn btn-success waves-effect px-4">{loading ? <BeatLoader /> : updatePasswordpayload ? 'Detail Updated' : 'Update'}</button>
                   </div>
                 </div>
               </form>
@@ -149,7 +154,7 @@ const ProfileSettings = () => {
                     <input type="text" className="form-control" placeholder="Enter Country" name="postal" />
                   </div>
                   <div className="form-group col-12">
-                    <button className="btn btn-success px-4">Save</button>
+                    <button className="btn btn-success px-4">Update</button>
                   </div>
                 </div>
               </form>
