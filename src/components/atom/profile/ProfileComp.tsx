@@ -1,9 +1,15 @@
-import React from 'react';
+import React  from 'react';
 import { res} from '../../../interfaces/login';
 import Avatar from 'react-avatar';
+// import {getData} from '../../../lib/utils';
 // import Moment from 'react-moment';
 
 const ProfileComp = () => {
+
+  // const userDetails = getData();
+
+  
+
   const userInfoFromStorage  = localStorage.getItem('userInfo');
 
   const userStorage : res = JSON.parse(userInfoFromStorage || '{}' );
@@ -11,13 +17,16 @@ const ProfileComp = () => {
   const name = userStorage.data.overview.name;
   const email = userStorage.data.email;
   const address = userStorage.data.overview.address;
+  // const tel = userStorage.data.overview;
   
   const day = new Date().getDay();
   const year = new Date().getFullYear();
   const month = new Date().getMonth();
   const time = new Date().getTime();
 
-
+  // useEffect(()=>{
+  //   console.log('data from function ', userDetails);
+  // },[]);
 
   
   function randomNumber(min : number, max : number) {
