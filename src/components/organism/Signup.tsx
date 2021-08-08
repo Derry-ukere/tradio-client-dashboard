@@ -22,9 +22,9 @@ const Signup = () => {
 
   const handleSubmit = (e : {preventDefault : ()=> void}) =>{
     e.preventDefault();
-    console.log('name is --',username);
-    console.log('email is --',email);
-    console.log('password is --',password);
+    // console.log('name is --',username);
+    // console.log('email is --',email);
+    // console.log('password is --',password);
     dispatch(registerAction.register(username,email,password));
   };
 
@@ -64,7 +64,7 @@ const Signup = () => {
           <div className="row justify-content-center h-100 align-items-center">
             <div className="col-xl-5 col-md-6">
               <div className="mini-logo text-center my-5">
-                <a href="https://amazing-borg-54732d.netlify.app/"><img src='./logo.png' alt="logo here" /></a>
+                <a href="https://tradiobtc.com/"><img src='./logo.png' alt="logo here" /></a>
               </div>
               <div className="auth-form card">
                 <div className="card-header justify-content-center">
@@ -74,15 +74,15 @@ const Signup = () => {
                   <form   className="signup_validate" onSubmit = {handleSubmit}>
                     <div className="form-group">
                       <label>Full Name</label>
-                      <input type="text" className="form-control" placeholder="username" required value = {username} onChange = {(e) => setUsername( e.target.value) }/>
+                      <input type="text" className="form-control" placeholder="Enter username" required value = {username} onChange = {(e) => setUsername( e.target.value) }/>
                     </div>
                     <div className="form-group">
                       <label>Email</label>
-                      <input type="email" className="form-control" placeholder="hello@example.com" required value = {email}  onChange = {(e) => setEmail(e.target.value)}/>
+                      <input type="email" className="form-control" placeholder="Enter your email" required value = {email}  onChange = {(e) => setEmail(e.target.value)}/>
                     </div>
                     <div className="form-group">
                       <label>Password</label>
-                      <input type="password" className="form-control" placeholder="Password" required value = {password}  onChange = {(e) => setpassword(e.target.value)}/>
+                      <input type="password" className="form-control" placeholder="Enter your Password" required value = {password}  onChange = {(e) => setpassword(e.target.value)}/>
                     </div>
                     <div className="text-center mt-4">
                       {loading ? <BeatLoader color = 'white' /> :<button type="submit" className="btn btn-success btn-block">Sign up</button>}

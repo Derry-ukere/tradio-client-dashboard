@@ -98,7 +98,7 @@ const Login = () => {
           <div className="row justify-content-center h-100 align-items-center">
             <div className="col-xl-5 col-md-6">
               <div className="mini-logo text-center my-5">
-                <a href="https://amazing-borg-54732d.netlify.app"><img src="./logo.png" alt="" /></a>
+                <a href="https://tradiobtc.com"><img src="./logo.png" alt="" /></a>
               </div>
               <div className="auth-form card">
                 <div className="card-header justify-content-center">
@@ -108,11 +108,11 @@ const Login = () => {
                   <form  className="signin_validate" action="otp-1.html" onSubmit = {handleSubmit}>
                     <div className="form-group">
                       <label>Email</label>
-                      <input type="email" className="form-control" placeholder="hello@example.com" required value = {email} onChange = {onEmailChange}/>
+                      <input type="email" className="form-control" placeholder="Enter your email" required value = {email} onChange = {onEmailChange}/>
                     </div>
                     <div className="form-group">
                       <label>Password</label>
-                      <input type="password" className="form-control" placeholder="Password" required value = {password} onChange = {onPaswwordChange}/>
+                      <input type="password" className="form-control" placeholder="Enter your password" required value = {password} onChange = {onPaswwordChange}/>
                     </div>
                     <div className="form-row d-flex justify-content-between mt-4 mb-2">
                       <div className="form-group mb-0">
