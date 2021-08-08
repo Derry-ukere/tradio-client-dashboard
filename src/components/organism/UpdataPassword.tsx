@@ -85,7 +85,7 @@ const Complete = () => {
         <div className="col-xl-12">
           <div className="card">
             <div className="mini-logo text-center my-5">
-              <a href="https://amazing-borg-54732d.netlify.app"><img src="/logo.png" alt="" /></a>
+              <a href="https://tradiobtc.com"><img src="/logo.png" alt="" /></a>
             </div>
             <div className="card-header">
               <h4 className="card-title">Reset Password</h4>

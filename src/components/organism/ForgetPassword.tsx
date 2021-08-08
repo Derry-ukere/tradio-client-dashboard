@@ -57,7 +57,7 @@ const ForgetPassword = () => {
           <div className="row justify-content-center h-100 align-items-center">
             <div className="col-xl-5 col-md-6">
               <div className="mini-logo text-center my-5">
-                <a href="https://amazing-borg-54732d.netlify.app"><img src="./logo.png" alt="" /></a>
+                <a href="https://tradiobtc.com"><img src="./logo.png" alt="" /></a>
               </div>
               <div className="auth-form card">
                 <div className="card-header justify-content-center">
@@ -67,7 +67,7 @@ const ForgetPassword = () => {
                   <form onSubmit = {handleSubmit}>
                     <div className="form-group">
                       <label>Email</label>
-                      <input type="email" className="form-control" placeholder="hello@example.com" value = {email}  onChange = {(e) => setemail (e.target.value)}/>
+                      <input type="email" className="form-control" placeholder="Enter your email" value = {email}  onChange = {(e) => setemail (e.target.value)}/>
                     </div>
                     <div className="text-center">
                       {loading ? <BeatLoader/> : <button type="submit" className="btn btn-success btn-block">Reset</button>}
