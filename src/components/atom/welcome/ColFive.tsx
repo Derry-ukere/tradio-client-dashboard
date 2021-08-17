@@ -1,16 +1,38 @@
-import React,{useEffect} from 'react';
+import React,{useEffect,useState} from 'react';
+import axios from 'axios';
 import {getData} from '../../../lib/utils';
 
 
 
-const ColFive = () => {
-  const data : any = getData();
-  const {availableBtc} = data.wallet;
 
+
+const ColFive = () => {
+  const UserInfo = getData();
+  const [btc, setBtc] = useState(0.0);
+  const [profit, setProfit] = useState(0.0);
+
+
+ 
+
+  
+  const getdata =  async () =>{
+    await axios.get(`https://tradio-client-services.herokuapp.com/api/client/lookupWithId?id=${UserInfo.data._id}`)
+      .then((data) => {
+        setBtc(data.data.overview.balance);
+        setProfit(data.data.wallet.profit);
+        
+
+      // setbtc(data.data);
+      });
+  };
+
+  useEffect(()=>{
+    getdata();
+  },[]);
 
 
   useEffect(()=>{
-    console.log('data,', data);
+    // console.log('data,', UserInfo);
   },[]);
 
   return (
@@ -21,7 +43,7 @@ const ColFive = () => {
         </div>
         <div className="card-body balance-widget ps ps--active-y">
           <div className="total-balance">
-            <h3>$ {availableBtc}</h3>
+            <h3>$ {btc + profit}</h3>
             <h6>Total Balance</h6>
           </div>
           <div className="table-responsive">

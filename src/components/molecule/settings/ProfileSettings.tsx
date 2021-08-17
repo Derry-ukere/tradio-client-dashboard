@@ -36,13 +36,12 @@ const ProfileSettings = () => {
 
 
   const clientsInformation = getData();
-  const name : any =  clientsInformation.overview.name;
+  const name : any =  clientsInformation.data.overview.name;
 
   useEffect(()=>{
    
     if(updatePasswordpayload){
       console.log(updatePasswordpayload);
-      console.log('clientsInformation',);
       console.log(loading);
 
     }

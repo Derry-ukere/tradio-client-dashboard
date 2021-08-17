@@ -31,11 +31,11 @@ const Wallet = () => {
   // if(userInfoFromStorage) {
   //   userStorage 
   // }
-  const wallet :any =  info?.wallet;
+  const wallet :any =  info?.data.wallet;
   const {availableBtc,availableMargin} = wallet;
 
   
-  const balance = availableBtc + 0.0230;
+  const balance = availableBtc;
   const total = availableBtc + availableMargin;
 
 

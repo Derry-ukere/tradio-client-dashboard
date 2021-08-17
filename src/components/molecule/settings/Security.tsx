@@ -6,9 +6,9 @@ import {getData} from '../../../lib/utils';
 const Security = () => {
 
   const userStorage = getData();
-  const name = userStorage.overview.name;
-  const id = userStorage._id;
-  const email = userStorage.email;
+  const name = userStorage.data.overview.name;
+  const id = userStorage.data._id;
+  const email = userStorage.data.email;
 
 
 
