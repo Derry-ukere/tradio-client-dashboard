@@ -1,44 +1,57 @@
 import React,{useState,useEffect} from 'react';
 import {BeatLoader} from 'react-spinners';
-import { useHistory} from 'react-router-dom';
-// import {Link} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {UpdateEmailAndPassword} from '../../../actions/updateEmailAndPassword';
 import {RootState} from '../../../store';
 import Avatar from 'react-avatar';
 import {getData} from '../../../lib/utils';
+// import {useHistory} from 'react-router-dom';
+import {registerAction} from '../../../actions/completeRegistration';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 
 const ProfileSettings = () => {
   const dispatch = useDispatch();
+  // const history = useHistory();
+  // const userDetails = getData();
+  // const id = userDetails.data._id;
+
+  const [updatename, setname] = useState('');
+  const [dob, setdate] = useState('');
+  const [preAdress, setpreAdress] = useState('');
+  const [permAdress, setpermAdress] = useState('');
+  const [city, setCity] = useState('');
+  const [country, setcountry] = useState(''); 
+  const [tel, setTel] = useState(''); 
+
   const clientRegister = useSelector( (state : RootState) => state.login);
   const updatePasswordandEmail = useSelector( (state : RootState) => state.UpdateEmailAndPassword);
+  const clientUpdate = useSelector( (state : RootState) => state.updateUserDetails);
+  const {loading : updateLoading, error,payload : payloadupdate} = clientUpdate;
 
   const {payload} = clientRegister;
-  const{loading,error,updatePasswordpayload} = updatePasswordandEmail;
+  const{loading,updatePasswordpayload} = updatePasswordandEmail;
 
-  const history = useHistory();
 
   const clientsInformation = getData();
-  const name =  clientsInformation.data.overview.name;
+  const name : any =  clientsInformation.overview.name;
 
   useEffect(()=>{
-    if(!payload){
-      history.push('/');
-    }
+   
     if(updatePasswordpayload){
       console.log(updatePasswordpayload);
       console.log('clientsInformation',);
       console.log(loading);
 
     }
-    console.log('clientsInformation', clientsInformation.data.overview.name);
-    console.log('error',error);
+   
   },[dispatch,payload,updatePasswordpayload,loading]);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const id = payload?.data._id;
+  const id : any = clientsInformation?._id;
 
 
 
@@ -46,15 +59,81 @@ const ProfileSettings = () => {
     e.preventDefault();
     console.log(email,password,id);
     if(id){
-      dispatch(UpdateEmailAndPassword.update(id,email,password));
+      dispatch(UpdateEmailAndPassword.updateEmailAndTel(id,email,password));
     }
     
   };
+
+  useEffect(()=>{
+    if(payloadupdate){
+      toast.success(' Details Successfully Updated', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      window.location.reload();
+    }
+  },[dispatch,payloadupdate]);
+
+  useEffect(()=>{
+    if( updatePasswordpayload){
+      toast.success(' Details Successfully Updated', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      window.location.reload();
+    }
+  },[dispatch,updatePasswordpayload]);
+
+  useEffect(()=>{
+    if(error){
+      toast.error('something went wrong, try again later', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+    
+  },[dispatch,error]);
+  
+
+  const handleSubmit = (e : {preventDefault : ()=> void})=>{
+    e.preventDefault();
+    const teleph = Number(tel);
+    dispatch(registerAction.completeRegistration(id,name,preAdress, dob, permAdress,teleph,city, country));
+  };
+
+
+
 
 
 
   return (
     <div className="col-xl-12">
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div className="row">
         <div className="col-xl-6 col-md-6">
           <div className="card">
@@ -64,22 +143,14 @@ const ProfileSettings = () => {
             <div className="card-body">
               <form action="#">
                 <div className="form-row">
-                  <div className="form-group col-xl-12">
-                    <label className="mr-sm-2">Your Name</label>
-                    <input type="text" className="form-control" placeholder="Name" />
-                  </div>
+                 
                   <div className="form-group col-xl-12">
                     <div className="media align-items-center mb-3">
                       <Avatar name={name}  className="mr-3 rounded-circle mr-0 mr-sm-3" />
                       <div className="media-body">
-                        <h5 className="mb-0">John Doe</h5>
-                        <p className="mb-0">Max file size is 20mb
-                        </p>
+                        <h5 className="mb-0">{name}</h5>
                       </div>
                     </div>
-                  </div>
-                  <div className="col-12">
-                    <button className="btn btn-success waves-effect px-4">Update</button>
                   </div>
                 </div>
               </form>
@@ -96,11 +167,11 @@ const ProfileSettings = () => {
                 <div className="form-row">
                   <div className="form-group col-xl-12">
                     <label className="mr-sm-2">New Email</label>
-                    <input type="email" className="form-control" value = {email} placeholder="Email"  onChange = {(e) => setEmail(e.target.value)} />
+                    <input type="email" className="form-control" required value = {email} placeholder="Email"  onChange = {(e) => setEmail(e.target.value)} />
                   </div>
                   <div className="form-group col-xl-12">
-                    <label className="mr-sm-2">New Password</label>
-                    <input type="password" className="form-control" value = {password}  placeholder="**********" onChange = {(e) => setPassword(e.target.value)} />
+                    <label className="mr-sm-2">New Telephone </label>
+                    <input type="tel" className="form-control" required value = {password}  placeholder="Enter Telephone" onChange = {(e) => setPassword(e.target.value)} />
                     <p className="mt-2 mb-0">Enable two factor authencation on the security
                     page
                     </p>
@@ -119,42 +190,38 @@ const ProfileSettings = () => {
               <h4 className="card-title">Personal Information</h4>
             </div>
             <div className="card-body">
-              <form method="post" name="myform" className="personal_validate" noValidate={true}>
+              <form method="post" name="myform" className="personal_validate" noValidate={true} onSubmit = {handleSubmit}>
                 <div className="form-row">
                   <div className="form-group col-xl-6 col-md-6">
                     <label className="mr-sm-2">Your Name</label>
-                    <input type="text" className="form-control" placeholder="Saiful Islam" name="fullname" />
+                    <input type="text" className="form-control" placeholder="enter Full name" value = {updatename} onChange = {(e) => setname(e.target.value)} />
                   </div>
                   <div className="form-group col-xl-6 col-md-6">
-                    <label className="mr-sm-2">Email</label>
-                    <input type="email" className="form-control" placeholder="Hello@example.com" name="email" />
+                    <label className="mr-sm-2">Your Phone Number</label>
+                    <input type="number" className="form-control" placeholder="Enter Phone number" value = {tel} onChange = {(e) => setTel(e.target.value)} /> 
                   </div>
                   <div className="form-group col-xl-6 col-md-6">
                     <label className="mr-sm-2">Date of birth</label>
-                    <input type="text" className="form-control hasDatepicker" placeholder="10-10-2020" id="datepicker" autoComplete="off" name="dob" />
+                    <input type="date" className="form-control hasDatepicker"  id="datepicker" autoComplete="off" onChange= {(e) => setdate(e.target.value)} />
                   </div>
                   <div className="form-group col-xl-6 col-md-6">
                     <label className="mr-sm-2">Present Address</label>
-                    <input type="text" className="form-control" placeholder="56, Old Street, Brooklyn" name="presentaddress" />
+                    <input type="text" className="form-control" placeholder="Enter Addreess" value = {preAdress} onChange = {(e) => setpreAdress(e.target.value)}/>
                   </div>
                   <div className="form-group col-xl-6 col-md-6">
                     <label className="mr-sm-2">Permanent Address</label>
-                    <input type="text" className="form-control" placeholder="123, Central Square, Brooklyn" name="permanentaddress" />
+                    <input type="text" className="form-control" placeholder="Enter Address" value = {permAdress} onChange = {(e) => setpermAdress(e.target.value)}/>
                   </div>
                   <div className="form-group col-xl-6 col-md-6">
                     <label className="mr-sm-2">City</label>
-                    <input type="text" className="form-control" placeholder="New York" name="city" />
-                  </div>
-                  <div className="form-group col-xl-6 col-md-6">
-                    <label className="mr-sm-2">Postal Code</label>
-                    <input type="text" className="form-control" placeholder="25481" name="postal" />
+                    <input type="text" className="form-control" placeholder="Enter City" value = {city} onChange = {(e) => setCity(e.target.value)} />
                   </div>
                   <div className="form-group col-xl-6 col-md-6">
                     <label className="mr-sm-2">Country </label>
-                    <input type="text" className="form-control" placeholder="Enter Country" name="postal" />
+                    <input type="text" className="form-control" placeholder="Enter Country"  value = {country} onChange = {(e) => setcountry(e.target.value)}/>
                   </div>
                   <div className="form-group col-12">
-                    <button className="btn btn-success px-4">Update</button>
+                    {updateLoading ? <BeatLoader color = 'white' /> : <button className="btn btn-success px-4">Save</button>}
                   </div>
                 </div>
               </form>

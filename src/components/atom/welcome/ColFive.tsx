@@ -1,12 +1,11 @@
 import React,{useEffect} from 'react';
 import {getData} from '../../../lib/utils';
-import { res} from '../../../interfaces/login';
 
 
 
 const ColFive = () => {
-  const data : res = getData();
-  const {availableBtc} = data.data.wallet;
+  const data : any = getData();
+  const {availableBtc} = data.wallet;
 
 
 

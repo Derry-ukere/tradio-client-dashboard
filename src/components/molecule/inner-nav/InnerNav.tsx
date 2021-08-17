@@ -1,23 +1,48 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React,{useEffect} from 'react';
+import React,{useEffect,useState} from 'react';
 import { Link } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {logOutAction} from '../../../actions/logout';
 import {RootState} from '../../../store';
+import {getData} from '../../../lib/utils';
+import axios from 'axios';
+
 
 const InnerNav = () => {
   const dispatch = useDispatch();
   const client = useSelector( (state : RootState) => state.login);
   const {loading,error,payload} = client ;
   // const history = useHistory();
-  const email = payload?.data.email;
-  const username = payload?.data.username;
-  const balance = payload?.data.wallet.availableBtc;
+  const UserInfo = getData();
+  const email = UserInfo.email;
+  const username = UserInfo.username;
+  // const balance = UserInfo.wallet.availableBtc;
+  const [apiData, setApiData] = useState<any>({});
+  const [profit, setprofit] = useState(0.0);
+  const [balance, setBalance] = useState(0.0);
+
   
-  // useEffect(()=>{
-  //   console.log('payload is --',payload?.data.email);
-  // },[]);
+
+  const getdata =  async () =>{
+    await axios.get(`https://tradio-client-services.herokuapp.com/api/client/lookupWithId?id=${UserInfo._id}`)
+      .then((data) => {
+        setApiData(data.data);
+      });
+  };
+
+  useEffect(()=>{
+    getdata();
+  },[]);
+
+  useEffect(()=>{
+    if(apiData.wallet){
+      console.log('api data is', );
+      setprofit(apiData.wallet.profit);
+      setBalance(apiData.overview.balance);
+    }
+  },[apiData,profit]);
+
   const logout = () =>{
     dispatch(logOutAction.logout());
   };
@@ -40,7 +65,7 @@ const InnerNav = () => {
         </div>
         <div className="total">
           <p>Profit</p>
-          <span>{balance} USD</span>
+          <span>{profit} USD</span> 
         </div>
       </div>
       <Link to="/account" className="dropdown-item">

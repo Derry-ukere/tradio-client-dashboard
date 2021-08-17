@@ -1,7 +1,7 @@
 import React from 'react';
 // import { res} from '../../../interfaces/login';
 // import {percentage} from '../../../helpers/helpers';
-
+import {getData} from '../../../lib/utils';
 
   
 
@@ -9,14 +9,14 @@ import React from 'react';
 
 
 const Bills = () => {
-  const data  = localStorage.getItem('userInfo');
-  let userInfoFromStorage: any;
-  if(data){
-    // eslint-disable-next-line no-unused-vars
-    userInfoFromStorage = JSON.parse(data);
-  }
-
-  const wallet =  userInfoFromStorage.data.wallet;
+  // const data  = localStorage.getItem('userInfo');
+  // let userInfoFromStorage: any;
+  // if(data){
+  //   // eslint-disable-next-line no-unused-vars
+  //   userInfoFromStorage = JSON.parse(data);
+  // }
+  const userInfoFromStorage = getData();
+  const wallet =  userInfoFromStorage.wallet;
 
   const {availableBtc} = wallet;
 
