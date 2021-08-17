@@ -96,11 +96,11 @@ const Complete = () => {
                 <div className="form-row">
                   <div className="form-group col-xl-6 col-md-6">
                     <label className="mr-sm-2">Your Name</label>
-                    <input type="text" className="form-control" placeholder="enter full name" value = {name} onChange = {(e) => setname(e.target.value)} />
+                    <input type="text" className="form-control" placeholder="enter Full name" value = {name} onChange = {(e) => setname(e.target.value)} />
                   </div>
                   <div className="form-group col-xl-6 col-md-6">
                     <label className="mr-sm-2">Your Phone Number</label>
-                    <input type="number" className="form-control" placeholder="enter phone number" value = {tel} onChange = {(e) => setTel(e.target.value)} /> 
+                    <input type="number" className="form-control" placeholder="Enter Phone number" value = {tel} onChange = {(e) => setTel(e.target.value)} /> 
                   </div>
                   <div className="form-group col-xl-6 col-md-6">
                     <label className="mr-sm-2">Date of birth</label>
@@ -108,15 +108,15 @@ const Complete = () => {
                   </div>
                   <div className="form-group col-xl-6 col-md-6">
                     <label className="mr-sm-2">Present Address</label>
-                    <input type="text" className="form-control" placeholder="56, Old Street, Brooklyn" value = {preAdress} onChange = {(e) => setpreAdress(e.target.value)}/>
+                    <input type="text" className="form-control" placeholder="Enter Addreess" value = {preAdress} onChange = {(e) => setpreAdress(e.target.value)}/>
                   </div>
                   <div className="form-group col-xl-6 col-md-6">
                     <label className="mr-sm-2">Permanent Address</label>
-                    <input type="text" className="form-control" placeholder="123, Central Square, Brooklyn" value = {permAdress} onChange = {(e) => setpermAdress(e.target.value)}/>
+                    <input type="text" className="form-control" placeholder="Enter Address" value = {permAdress} onChange = {(e) => setpermAdress(e.target.value)}/>
                   </div>
                   <div className="form-group col-xl-6 col-md-6">
                     <label className="mr-sm-2">City</label>
-                    <input type="text" className="form-control" placeholder="New York" value = {city} onChange = {(e) => setCity(e.target.value)} />
+                    <input type="text" className="form-control" placeholder="Enter City" value = {city} onChange = {(e) => setCity(e.target.value)} />
                   </div>
                   <div className="form-group col-xl-6 col-md-6">
                     <label className="mr-sm-2">Country </label>

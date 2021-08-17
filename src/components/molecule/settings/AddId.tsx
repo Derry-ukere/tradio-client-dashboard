@@ -6,7 +6,7 @@ const AddId = () => {
       <div className="col-xl-5 col-md-6">
         <div className="auth-form card">
           <div className="card-body">
-            <form action="verify-step-3.html" className="identity-upload">
+            <form action="settings" className="identity-upload">
               <div className="identity-content">
                 <h4>Upload your ID card</h4>
                 <span>(Driving License or Government ID card)</span>
@@ -16,14 +16,7 @@ const AddId = () => {
                 <label className="mr-sm-2">Upload Front ID </label>
                 <span className="float-right">Maximum file size is 2mb</span>
                 <div className="file-upload-wrapper" data-text="front.jpg">
-                  <input name="file-upload-field" type="file" className="file-upload-field" />
-                </div>
-              </div>
-              <div className="form-group">
-                <label className="mr-sm-2">Upload Back ID </label>
-                <span className="float-right">Maximum file size is 2mb</span>
-                <div className="file-upload-wrapper" data-text="back.jpg">
-                  <input name="file-upload-field" type="file" className="file-upload-field" />
+                  <input name="file-upload-field" type="file" className="file-upload-field" required />
                 </div>
               </div>
               <div className="text-center">

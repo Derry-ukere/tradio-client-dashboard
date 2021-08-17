@@ -13,9 +13,9 @@ export const rootReducer = combineReducers({
   login:LoginReducer.login,
   register:RegisterReducer.register,
   completeReg : CompleteRegistration.register,
+  updateUserDetails : CompleteRegistration.updateDetails,
   UpdateEmailAndPassword:UpdateEmailAndPassword.update,
   ResetPassword:ResetPassword.reset,
   SendResetMail:SendResetMail.send,
   UpdatePayment:UpdatePayment.login,
-
 });

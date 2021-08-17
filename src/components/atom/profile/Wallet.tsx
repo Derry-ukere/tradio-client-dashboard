@@ -1,16 +1,37 @@
-import React from 'react';
-import { res} from '../../../interfaces/login';
+import React,{} from 'react';
+// import { res} from '../../../interfaces/login';
+// import React,{useState,useEffect} from 'react';
+// import {BeatLoader} from 'react-spinners';
+// import { useHistory, useParams} from 'react-router-dom';
+// import {Link} from 'react-router-dom';
+// import { useSelector} from 'react-redux';
+// // import {registerAction} from '../../actions/completeRegistration';
+// import {RootState} from '../../../store';
+// import { ToastContainer, toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
+
+import {getData} from '../../../lib/utils';
+
 
 const Wallet = () => {
 
-  const userInfoFromStorage  = localStorage.getItem('userInfo');
 
-  const userStorage : res = JSON.parse(userInfoFromStorage || '{}' );
+  // const clientRegister = useSelector( (state : RootState) => state.login);
+  // const {payload} = clientRegister;
+
+  // useEffect(() =>{
+  //   console.log(payload);
+  // },[payload]);
+
+
+  const info = getData();
+  // const userInfoFromStorage  = localStorage.getItem('userInfo');
+
+  // const userStorage : res = JSON.parse(userInfoFromStorage || '{}' );
   // if(userInfoFromStorage) {
   //   userStorage 
   // }
-  
-  const wallet = userStorage.data.wallet;
+  const wallet :any =  info?.wallet;
   const {availableBtc,availableMargin} = wallet;
 
   

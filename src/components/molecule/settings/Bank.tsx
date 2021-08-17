@@ -29,12 +29,7 @@ const Bank = () => {
                     </div>
                   </td>
                   <td>
-                    <div className="verify">
-                      <div className="verified">
-                        <span><i className="bi bi-check-lg" /></span>
-                        <a href="#">Verified</a>
-                      </div>
-                    </div>
+                  
                   </td>
                 </tr>
                 <tr>
@@ -54,12 +49,7 @@ const Bank = () => {
                     </div>
                   </td>
                   <td>
-                    <div className="verify">
-                      <div className="not-verify">
-                        <span><i className="bi bi-x-lg" /></span>
-                        <a href="#">Not verified</a>
-                      </div>
-                    </div>
+                   
                   </td>
                 </tr>
               </tbody>

@@ -35,5 +35,38 @@ export const  registerAction = {
       });
     }
   },
+  
+  completeRegistration : (id: string, name: string,address:string,dob: string, permAdress: string,tel:number ,city:string,country:string) => async (dispatch :Dispatch <registerTypes.updateactionType> )=>{
+    try {
+      dispatch({
+        type:registerConstants.UPDATEE_USER_DETAILS_LOADING,
+        loading: true,
+
+      });
+      const config = {
+        headers: {
+          'Content-type': 'application/json',
+        },
+      };
+
+      const {data} = await axios.put(`https://tradio-client-services.herokuapp.com/api/client/upate/personalDetailsSettings?id=${id}&name=${name}&address=${address}&dob=${dob}&permAdress=${permAdress}&tel=${tel}&city=${city}&country=${country}`,config);
+
+      dispatch({
+        type:registerConstants.UPDATEE_USER_DETAILS_SUCCESS,
+        loading: false,
+        payload:data
+      });
+      localStorage.setItem('userInfo', JSON.stringify(data));
+
+    } catch (error) {
+      dispatch({
+        type:registerConstants.UPDATEE_USER_DETAILS_FAIL,
+        loading: false,
+        error: error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+      });
+    }
+  },
 };
 

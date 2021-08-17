@@ -1,16 +1,24 @@
 import React, {useEffect} from 'react';
 import { Link } from 'react-router-dom';
+// import { useSelector} from 'react-redux';
+// import {RootState} from '../../../store';
+import {getData} from '../../../lib/utils';
+
 
 const PageTitle = () => {
-  const userInfoFromStorage = localStorage.getItem('userInfo');
-  let userStorage : any;
-  if(userInfoFromStorage) {
-    userStorage = JSON.parse(userInfoFromStorage);
-  }
-  const name = userStorage.data.overview.name;
+  // const clientRegister = useSelector( (state : RootState) => state.login);
+  // const {payload} = clientRegister;
+
+  // const userInfoFromStorage = localStorage.getItem('userInfo');
+  // let userStorage : any;
+  // if(userInfoFromStorage) {
+  //   userStorage = JSON.parse(userInfoFromStorage);
+  // }
+  const info = getData();
+  const name = info.overview.name;
 
   useEffect(()=>{
-    console.log('from page title',userStorage);
+    console.log('name is ', name);
   },[]);
   return (
     <div className="page-title dashboard">

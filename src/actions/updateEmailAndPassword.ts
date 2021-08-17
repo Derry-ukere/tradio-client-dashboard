@@ -1,10 +1,11 @@
 import * as registerTypes from '../interfaces/emailandpassword';
+
 import * as registerConstants from '../constants/emailandPassword';
 import { Dispatch } from 'react';
 import axios from 'axios';
 
 export const  UpdateEmailAndPassword = {
-  update : (id: string, email: string,password:string) => async (dispatch :Dispatch <registerTypes.actionType> )=>{
+  updateEmailAndTel : (id: string, email: string,tel:string) => async (dispatch :Dispatch <registerTypes.actionType> )=>{
     try {
       dispatch({
         type:registerConstants.UPDATE_EMAIL_AND_PASSWORD_LOADING,
@@ -17,13 +18,15 @@ export const  UpdateEmailAndPassword = {
         },
       };
 
-      const {data} = await axios.put(`https://tradio-client-services.herokuapp.com/api/client/upate/emailAndPassword?id=${id}&email=${email}&password=${password}`,config);
+      const {data} = await axios.put(`https://tradio-client-services.herokuapp.com/api/client/upate/emailAndTel?id=${id}&email=${email}&t=${tel}`,config);
 
       dispatch({
         type:registerConstants.UPDATE_EMAIL_AND_PASSWORD_SUCCESS,
         loading: false,
         updatePasswordpayload:data
       });
+      localStorage.setItem('userInfo', JSON.stringify(data));
+
         
     } catch (error) {
       dispatch({
@@ -35,6 +38,7 @@ export const  UpdateEmailAndPassword = {
       });
     }
   },
+
 };
 
 

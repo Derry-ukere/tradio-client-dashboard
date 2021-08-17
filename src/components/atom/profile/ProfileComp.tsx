@@ -1,22 +1,22 @@
 import React  from 'react';
-import { res} from '../../../interfaces/login';
+// import { res} from '../../../interfaces/login';
 import Avatar from 'react-avatar';
-// import {getData} from '../../../lib/utils';
+import {getData} from '../../../lib/utils';
 // import Moment from 'react-moment';
 
 const ProfileComp = () => {
 
-  // const userDetails = getData();
+  const userStorage = getData();
 
   
 
-  const userInfoFromStorage  = localStorage.getItem('userInfo');
+  // const userInfoFromStorage  = localStorage.getItem('userInfo');
 
-  const userStorage : res = JSON.parse(userInfoFromStorage || '{}' );
+  // const userStorage : res = JSON.parse(userInfoFromStorage || '{}' );
  
-  const name = userStorage.data.overview.name;
-  const email = userStorage.data.email;
-  const address = userStorage.data.overview.address;
+  const name = userStorage.overview.name;
+  const email = userStorage.email;
+  const address = userStorage.overview.address;
   // const tel = userStorage.data.overview;
   
   const day = new Date().getDay();
@@ -47,8 +47,6 @@ const ProfileComp = () => {
             <div className="media-body">
               <span>Hello</span>
               <h4 className="mb-2">{name}</h4>
-              <p className="mb-1"> <span><i className="bi bi-telephone-fill mr-2 text-primary" /></span> +1
-              235 5547</p>
               <p className="mb-1"> <span><i className="bi bi-envelope mr-2 text-primary" /></span>
                 {email}
               </p>
