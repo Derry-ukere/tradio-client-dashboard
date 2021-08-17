@@ -15,8 +15,8 @@ const InnerNav = () => {
   const {loading,error,payload} = client ;
   // const history = useHistory();
   const UserInfo = getData();
-  const email = UserInfo.email;
-  const username = UserInfo.username;
+  const email = UserInfo.data.email;
+  const username = UserInfo.data.username;
   // const balance = UserInfo.wallet.availableBtc;
   const [apiData, setApiData] = useState<any>({});
   const [profit, setprofit] = useState(0.0);
@@ -25,7 +25,7 @@ const InnerNav = () => {
   
 
   const getdata =  async () =>{
-    await axios.get(`https://tradio-client-services.herokuapp.com/api/client/lookupWithId?id=${UserInfo._id}`)
+    await axios.get(`https://tradio-client-services.herokuapp.com/api/client/lookupWithId?id=${UserInfo.data._id}`)
       .then((data) => {
         setApiData(data.data);
       });
@@ -37,7 +37,6 @@ const InnerNav = () => {
 
   useEffect(()=>{
     if(apiData.wallet){
-      console.log('api data is', );
       setprofit(apiData.wallet.profit);
       setBalance(apiData.overview.balance);
     }

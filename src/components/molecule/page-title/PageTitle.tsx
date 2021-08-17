@@ -15,10 +15,10 @@ const PageTitle = () => {
   //   userStorage = JSON.parse(userInfoFromStorage);
   // }
   const info = getData();
-  const name = info.overview.name;
+  const name = info.data.fullname;
 
   useEffect(()=>{
-    console.log('name is ', name);
+    console.log('name is ', info);
   },[]);
   return (
     <div className="page-title dashboard">

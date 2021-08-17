@@ -16,7 +16,7 @@ const Bills = () => {
   //   userInfoFromStorage = JSON.parse(data);
   // }
   const userInfoFromStorage = getData();
-  const wallet =  userInfoFromStorage.wallet;
+  const wallet =  userInfoFromStorage.data.wallet;
 
   const {availableBtc} = wallet;
 

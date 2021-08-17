@@ -14,9 +14,9 @@ const ProfileComp = () => {
 
   // const userStorage : res = JSON.parse(userInfoFromStorage || '{}' );
  
-  const name = userStorage.overview.name;
-  const email = userStorage.email;
-  const address = userStorage.overview.address;
+  const name = userStorage.data.overview.name;
+  const email = userStorage.data.email;
+  const address = userStorage.data.overview.address;
   // const tel = userStorage.data.overview;
   
   const day = new Date().getDay();
