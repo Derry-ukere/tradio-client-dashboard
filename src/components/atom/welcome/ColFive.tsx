@@ -1,5 +1,7 @@
 import React,{useEffect,useState} from 'react';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {getData} from '../../../lib/utils';
 
 
@@ -10,6 +12,7 @@ const ColFive = () => {
   const UserInfo = getData();
   const [btc, setBtc] = useState(0.0);
   const [profit, setProfit] = useState(0.0);
+  const [warn, setWarn] = useState(false);
 
 
  
@@ -20,9 +23,7 @@ const ColFive = () => {
       .then((data) => {
         setBtc(data.data.overview.balance);
         setProfit(data.data.wallet.profit);
-        
-
-      // setbtc(data.data);
+        setWarn(data.data.warn);
       });
   };
 
@@ -31,12 +32,31 @@ const ColFive = () => {
   },[]);
 
 
-  useEffect(()=>{
-    // console.log('data,', UserInfo);
-  },[]);
+  useEffect(()=>{ 
+    if(warn ){
+      toast.warn('Your Account has been suspended, further trading activities is paused until further notice, contact admin for more details', {
+        position: 'top-right',
+        autoClose: 20000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+  },[warn]);
 
   return (
     <div className="col-xl-2 col-lg-4 col-xxl-4">
+      <ToastContainer
+        position="top-right"
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div className="card">
         <div className="card-header">
           <h4 className="card-title">Your Portfolio </h4>
